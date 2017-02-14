@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="imgupGridView" type="id"/>
+    <item name="imgupTvDirName" type="id"/>
+    <item name="imgupTvDirCount" type="id"/>
+    <item name="imgupPopLv" type="id"/>
+    <item name="popIvYl" type="id"/>
+    <item name="popTvDirName" type="id"/>
+    <item name="popTvDirImgCount" type="id"/>
+    <item name="popImgSel" type="id"/>
+</resources>
