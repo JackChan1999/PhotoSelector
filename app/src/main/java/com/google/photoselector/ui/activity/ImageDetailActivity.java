@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.google.photoselector.R;
 import com.google.photoselector.imageloader.ImageLoader;
-import com.google.photoselector.ui.photoview.PhotoView;
+import com.google.photoselector.ui.widget.ResizablePhotoView;
 
 import java.util.List;
 
@@ -37,11 +37,11 @@ import java.util.List;
  **/
 public class ImageDetailActivity extends AppCompatActivity {
 
-    private ViewPager mViewPager;
-    private List<String> mData;
+    private ViewPager      mViewPager;
+    private List<String>   mData;
     private LayoutInflater mInflater;
-    private int mPostion;
-    private ImageLoader mLoader;
+    private int            mPostion;
+    private ImageLoader    mLoader;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,15 +77,11 @@ public class ImageDetailActivity extends AppCompatActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View      view = mInflater.inflate(R.layout.layout_image, container, false);
-            PhotoView iv   = (PhotoView) view.findViewById(R.id.iv);
-             mLoader.loadImage(mData.get(position), iv);
-            //Glide.with(ImageDetailActivity.this).load(mData.get(position)).into(iv);
-            //PhotoViewAttacher attacher = new PhotoViewAttacher(iv);
-            //attacher.update();
-
-            container.addView(view);
-            return view;
+            View itemView = mInflater.inflate(R.layout.layout_image, container, false);
+            ResizablePhotoView iv = (ResizablePhotoView) itemView.findViewById(R.id.iv);
+            mLoader.loadImage(mData.get(position), iv);
+            container.addView(itemView);
+            return itemView;
         }
 
         @Override

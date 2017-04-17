@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
-    private File mCurrentDir;
-    private int mMaxCount;
+    private File         mCurrentDir;
+    private int          mMaxCount;
     private List<String> imgs;
 
     @Override
@@ -27,27 +27,27 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
                 ContentResolver resolver = getContentResolver();
-                String selection = MediaStore.Images.Media.MIME_TYPE+"=? or"+
-                        MediaStore.Images.Media.MIME_TYPE+"=?";
-                String[] args = new String[]{"image/jpeg","image/png"};
+                String selection = MediaStore.Images.Media.MIME_TYPE + "=? or" +
+                        MediaStore.Images.Media.MIME_TYPE + "=?";
+                String[] args = new String[]{"image/jpeg", "image/png"};
                 String sortOrder = MediaStore.Images.Media.DATE_MODIFIED;
                 Cursor cursor = resolver.query(uri, null, selection, args, sortOrder);
 
 
                 Set<String> mDirpaths = new HashSet<String>();
-                while (cursor.moveToNext()){
+                while (cursor.moveToNext()) {
                     String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images
                             .Media.DATA));
                     File parentFile = new File(path).getParentFile();
-                    if (parentFile == null){
+                    if (parentFile == null) {
                         continue;
                     }
                     String dirpath = parentFile.getAbsolutePath();
                     FolderBean bean = null;
 
-                    if (mDirpaths.contains(dirpath)){
+                    if (mDirpaths.contains(dirpath)) {
                         continue;
-                    }else {
+                    } else {
                         mDirpaths.add(dirpath);
                         bean = new FolderBean();
                         bean.setDirPath(dirpath);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     int picsize = parentFile.list().length;
-                    if (picsize > mMaxCount){
+                    if (picsize > mMaxCount) {
                         mMaxCount = picsize;
                         mCurrentDir = parentFile;
                     }
@@ -64,13 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-        }){}.start();
-
-
-
-
-
-
+        }) {
+        }.start();
 
     }
+
 }
